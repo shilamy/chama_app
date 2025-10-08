@@ -147,6 +147,7 @@ export default function EditMemberPage() {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       // Here you would typically make an API call to update the member
+    
       console.log('Updating member with data:', { id: memberId, ...formData });
       
       // Simulate successful save

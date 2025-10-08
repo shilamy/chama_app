@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💰 Chama Management System
 
-## Getting Started
+A full-stack **Chama (informal banking)** management platform designed to help savings groups efficiently manage members, contributions, loans, fines, and reports.  
+Built using **Laravel 11** for the backend and **React (Inertia.js)** for the frontend.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- **Member Management** – Add, view, edit, and delete members with unique verification (name, phone, ID).
+- **Savings & Transactions** – Record deposits, withdrawals, and member contributions.
+- **Loan Processing** – Issue loans, manage repayments, and include guarantors.
+- **Fines Management** – Assign and track fines automatically or manually.
+- **Reports Dashboard** – Filter and export summaries (CSV/PDF) by date, type, or member.
+- **Budgeting Tool** – Plan and track Chama expenses against targets. {**not implemented yet**}
+- **Content Module** – Manage blogs and podcasts with tags, categories, and engagement tracking.  {**not implemented yet**}
+- **M-Pesa Integration (coming soon)** – Enable mobile payments and automated confirmations.
+
+---
+
+## 🧩 Tech Stack
+
+**Frontend:** React + Inertia.js + Tailwind CSS  
+**Backend:** Laravel 11 (REST API)  
+**Database:** MySQL  
+**Authentication:** Laravel Breeze / Jetstream (Inertia stack)  
+**Integrations:** M-Pesa API (planned)
+
+---
+
+## ⚙️ Installation
+
+### Prerequisites
+- PHP 8.3+
+- Composer
+- Node.js & npm
+- MySQL or PostgreSQL
+- Git
+
+### Steps
 
 ```bash
+# Clone the repository
+git clone https://github.com/<your-username>/chama_app.git
+
+# Move into project directory
+cd chama_app/frontend
+cd chama_app/backend
+# Install backend dependencies
+composer install
+
+# Install frontend dependencies
+npm install
+
+# Set up your environment file
+cp .env.example .env
+php artisan key:generate
+
+# Run migrations
+php artisan migrate
+
+# Start the Laravel backend
+php artisan serve
+
+# Run the frontend
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Chamampro/
+│
+├── backend/ (Laravel API)
+│   ├── app/
+│   ├── database/
+│   └── routes/
+│
+├── frontend/ (React + Inertia)
+│   ├── src/
+│   ├── components/
+│   └── pages/
+│
+└── README.md
