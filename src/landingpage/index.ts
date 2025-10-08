@@ -1,0 +1,9 @@
+export { default as Hero } from './Hero';
+export { default as Stats } from './Stats';
+export { default as Business } from './Business';
+export { default as Product } from './Product';
+export { default as Clients } from './Clients';
+export { default as CardDeals } from './CardDeals';
+export { default as Footer } from './Footer';
+export { default as Team } from './Team';
+export { default as TryIt } from './TryIt';
