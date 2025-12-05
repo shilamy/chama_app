@@ -1,4 +1,4 @@
-import { Member, Ngumbato, NgumbatoSummary } from "@/types";
+import { LoanApplication, Member, Ngumbato, NgumbatoSummary } from "@/types";
 
 // data/mockData.ts
 export const mockMembers: Member[] = [
@@ -43,6 +43,44 @@ export const mockMembers: Member[] = [
   }
 ];
 
+export const mockLoans: LoanApplication[] = [
+  {
+    id: '1',
+    memberId: '1',
+    memberName: 'Jane Wanjiku',
+    amount: 50000,
+    purpose: 'Business Expansion',
+    applicationDate: '2025-12-05',
+    status: 'approved',
+    interestRate: 5,
+    term: 12,
+    monthlyInstallment: 4375,
+    disbursementDate: '2025-12-10',
+    dueDate: '2026-12-10',
+    creditScore: 85,
+    collateral: 'Land Title',
+    emergencyContact: 'Mary Wanjiku', // ✅ add this
+    emergencyPhone: '+254712345679',  // ✅ add this
+  },
+  {
+    id: '2',
+    memberId: '2',
+    memberName: 'Michael Otieno',
+    amount: 30000,
+    purpose: 'Education Fees',
+    applicationDate: '2025-11-20',
+    status: 'pending',
+    interestRate: 5,
+    term: 6,
+    monthlyInstallment: 5250,
+    disbursementDate: '2025-11-25',
+    dueDate: '2026-05-25',
+    creditScore: 78,
+    collateral: '',
+    emergencyContact: 'Peter Otieno',
+    emergencyPhone: '+254723456780',
+  }
+];
 
     export const mockNgumbatos: Ngumbato[] = [
         {
