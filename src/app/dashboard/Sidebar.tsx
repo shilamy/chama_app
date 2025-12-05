@@ -31,19 +31,26 @@ export default function DashboardSidebar() {
   const submenus = {
     'Members': [
       { name: 'View All Members', href: routes.members.list },
-      { name: 'Add New Member', href: routes.members.add },
+      { name: 'Add New Record', href: routes.members.add },
       // Edit member links removed - handle these on member detail pages
     ],
     'Savings': [
       { name: 'Savings Overview', href: routes.savings.list },
-      { name: 'Add Contribution', href: routes.savings.add },
-      // Use defined routes instead of hardcoded paths
+      { name: 'Add Savings', href: routes.savings.add },
+      
     ],
-    'Loans': [
-      { name: 'Loan Applications', href: routes.loans.list },
-      { name: 'Apply for Loan', href: routes.loans.add },
-      // Use defined routes instead of hardcoded paths
+   'Loans': [
+  { name: 'Loan Applications', href: routes.loans.list },          
+  { name: 'Apply for Loan', href: routes.loans.add },                
+  { name: 'Process Loan', href: routes.loans.process.list },
+  { name: 'Loan Schedule', href: routes.loans.schedule.list },
+],
+
+    'Ngumbato': [
+      { name: 'Ngumbato Overview', href: routes.ngumbato.list },
+      { name: 'Add Ngumbato', href: routes.ngumbato.add },
     ],
+
     'Content Management': [
       { name: 'Podcasts', href: routes.podcasts.add, icon: Podcast },
       { name: 'Articles', href: routes.articles.add, icon: BookOpen },
@@ -55,7 +62,7 @@ export default function DashboardSidebar() {
     { name: 'Members', href: routes.members.list, icon: Users, hasSubmenu: true },
     { name: 'Savings', href: routes.savings.list, icon: PiggyBank, hasSubmenu: true },
     { name: 'Loans', href: routes.loans.list, icon: HandCoins, hasSubmenu: true },
-    { name: 'Ngumbato', href: routes.ngumbato.base, icon: TrendingUp, hasSubmenu: false },
+    { name: 'Ngumbato', href: routes.ngumbato.list, icon: TrendingUp, hasSubmenu: false },
     { name: 'Investments', href: routes.investments.list, icon: Target, hasSubmenu: false },
     { name: 'Withdrawals', href: routes.withdrawals.list, icon: Wallet, hasSubmenu: false },
     { name: 'Fines', href: routes.fines.list, icon: AlertCircle, hasSubmenu: false },

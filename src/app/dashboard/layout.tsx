@@ -1,4 +1,3 @@
-// app/dashboard/layout.tsx
 'use client';
 import { useAuth } from '@/contexts/AuthContext';
 import Sidebar from '@/app/dashboard/Sidebar';

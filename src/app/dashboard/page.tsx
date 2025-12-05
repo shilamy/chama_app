@@ -483,7 +483,7 @@ export default function DashboardOverview() {
 
                     {/* Filter Panel */}
                     {showFilterPanel && (
-                      <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-lg border border-gray-200 z-20 p-4">
+                      <div className="absolute right-0 mt-2 w-80 bg-white text-gray-900 rounded-xl shadow-lg border border-gray-200 z-20 p-4">
                         <div className="flex items-center justify-between mb-4">
                           <h3 className="text-lg font-semibold text-gray-900">Filters</h3>
                           <button 
@@ -798,7 +798,7 @@ export default function DashboardOverview() {
                         const Icon = action.icon;
                         return (
                           <Link 
-                            key={index}
+                            key={index} 
                             href={action.href}
                             className="flex items-center justify-between p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-200 group"
                           >

@@ -390,7 +390,7 @@ export default function MembersPage() {
 
           <div className="flex items-center justify-end space-x-2 mt-4 pt-4 border-t border-gray-200">
             <Link
-              href={`${routes.members.base}/${member.id}`}
+              href={`${routes.members.list}/${member.id}`}
               className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
               title="View Details"
             >

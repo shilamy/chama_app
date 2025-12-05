@@ -217,6 +217,45 @@ export interface Loan {
   termMonths: number;
   monthlyPayment: number;
 }
+interface LoanProduct {
+  id: string;
+  name: string;
+  interestRate: number;
+  maxAmount: number;
+  minAmount: number;
+  maxTerm: number;
+  minTerm: number;
+}
+export interface LoanSummary {
+  totalLoans: number;
+  activeLoans: number;
+  pendingApplications: number;
+  totalRepayments: number;
+  overdueLoans: number;
+  loanPerformance: number; // percentage
+}
+export interface LoanApplication {
+  id: string;
+  memberId: string;
+  memberName: string;
+  amount: number;
+  purpose: string;
+  applicationDate: string;
+  status: 'pending' | 'approved' | 'rejected' | 'disbursed' | 'completed';
+  interestRate: number;
+  term: number; // in months
+  monthlyInstallment: number;
+  disbursementDate?: string;
+  dueDate?: string;
+  notes?: string;
+  creditScore: number;
+  collateral?: string;
+  businessPlan?: string;
+  emergencyContact: string;
+  emergencyPhone: string;
+}
+
+
 
 export interface Meeting {
   id: string;
@@ -244,6 +283,7 @@ export interface Member {
   savingsBalance: number;
 }
 
+
 type MemberRoutes = {
   base: string; // Add the missing property
   list: string;
@@ -254,44 +294,75 @@ type MemberRoutes = {
   reques: string;
 };
 
-// data/mockData.ts
-export const mockMembers: Member[] = [
-  {
-    id: '1',
-    firstName: 'Jane',
-    lastName: 'Wanjiku',
-    email: 'jane@example.com',
-    phone: '+254712345678',
-    role: 'chairperson',
-    joinDate: '2023-01-15',
-    status: 'active',
-    contributions: 12500,
-    savingsBalance: 85000
-  },
-  {
-    id: '2',
-    firstName: 'Michael',
-    lastName: 'Otieno',
-    email: 'michael@example.com',
-    phone: '+254723456789',
-    role: 'treasurer',
-    joinDate: '2023-02-20',
-    status: 'active',
-    contributions: 11800,
-    savingsBalance: 72000
-  },
-  {
-    id: '3',
-    firstName: 'Grace',
-    lastName: 'Auma',
-    email: 'grace@example.com',
-    phone: '+254734567890',
-    role: 'member',
-    joinDate: '2023-03-10',
-    status: 'inactive',
-    contributions: 8500,
-    savingsBalance: 45000
-  }
+interface Ngumbato {
+  id: string;
+  memberId: string;
+  memberName: string;
+  principleAmount: number;
+  monthlyContribution: number;
+  startDate: string;
+  dueDate: string;
+  status: 'active' | 'completed' | 'defaulted';
+  totalPaid: number;
+  remainingBalance: number;
+  fines: number;
+  payments: Payment[];
+  fineRate: number; // Fine percentage
+}
 
-  
-];
+interface Payment {
+  id: string;
+  date: string;
+  dueDate: string;
+  amount: number;
+  status: 'paid' | 'pending' | 'overdue';
+  fineAmount: number;
+  finePaid: boolean;
+  daysLate: number;
+}
+
+interface NgumbatoSummary {
+  totalActive: number;
+  totalCollected: number;
+  totalFines: number;
+  overduePayments: number;
+  totalFinesCollected: number;
+}
+
+
+interface SavingsTransaction {
+  id: string;
+  memberId: string;
+  memberName: string;
+  amount: number;
+  type: 'savings' | 'emergency' | 'special' | 'loan_repayment';
+  date: string;
+  paymentMethod: 'mpesa' | 'cash' | 'bank';
+  transactionId: string;
+  notes?: string;
+  status: 'completed' | 'pending' | 'failed';
+}
+
+interface SavingsSummary {
+  totalSavings: number;
+  totalMembers: number;
+  monthlyContribution: number;
+  growthRate: number;
+  emergencyFund: number;
+  specialProjects: number;
+}
+
+export interface Expenses {
+  id: string;
+  title: string;
+  amount: number;
+  date: string;
+  category: 'operational' | 'administrative' | 'miscellaneous';
+  incurredBy: string;
+  status: 'pending' | 'approved' | 'rejected' | 'paid';
+  notes?: string;
+
+}
+
+
+

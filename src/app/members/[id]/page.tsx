@@ -1,38 +1,29 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
 import { 
   ArrowLeft,
   Plus,
+  User,
   Calendar,
   DollarSign,
   FileText,
+  AlertCircle,
   PiggyBank,
   HandCoins,
   Wallet,
-  CheckCircle,
-  AlertCircle
+  Users
 } from 'lucide-react';
 import Link from 'next/link';
 import { routes } from '@/lib/routes';
-import { Member, Contribution, Loan, Expense } from '@/types';
-import { mockMembers } from '@/data/mockData';
-
-// Mock data storage (in real app, this would be API calls)
-const mockContributions: Contribution[] = [];
-const  mockLoans: Loan[] = [];
-const  mockExpenses: Expense[] = [];
+import { Member } from '@/types';
 
 export default function AddPage() {
   const { user } = useAuth();
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('contribution');
   const [members, setMembers] = useState<Member[]>([]);
   const [memberLoading, setMemberLoading] = useState(true);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
 
   // Separate form states for each tab
   const [contributionData, setContributionData] = useState({
@@ -68,21 +59,38 @@ export default function AddPage() {
     loadMembers();
   }, []);
 
-  useEffect(() => {
-    if (showSuccessAlert) {
-      const timer = setTimeout(() => {
-        setShowSuccessAlert(false);
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [showSuccessAlert]);
-
   const loadMembers = async () => {
     setMemberLoading(true);
     try {
+      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 800));
       
-     
+      const mockMembers: Member[] = [
+        {
+          id: '1',
+          firstName: 'Jane',
+          lastName: 'Wanjiku',
+          email: 'jane@example.com',
+          phone: '+254712345678',
+          role: 'chairperson',
+          joinDate: '2023-01-15',
+          status: 'active',
+          contributions: 125000,
+          savingsBalance: 125000,
+        },
+        {
+          id: '2',
+          firstName: 'Michael',
+          lastName: 'Otieno',
+          email: 'michael@example.com',
+          phone: '+254723456789',
+          role: 'treasurer',
+          joinDate: '2023-02-20',
+          status: 'active',
+          contributions: 98000,
+          savingsBalance: 98000,
+        }
+      ];
       
       setMembers(mockMembers);
     } catch (error) {
@@ -92,52 +100,13 @@ export default function AddPage() {
     }
   };
 
-  const showSuccess = (message: string) => {
-    setSuccessMessage(message);
-    setShowSuccessAlert(true);
-  };
-
   const handleContributionSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Create new contribution
-      const newContribution: Contribution = {
-        id: `cont_${Date.now()}`,
-        memberId: contributionData.memberId,
-        amount: parseFloat(contributionData.amount),
-        date: contributionData.date,
-        type: contributionData.type as any,
-        status: 'completed',
-        paymentMethod: contributionData.paymentMethod as 'mpesa' | 'cash' | 'bank',
-        transactionId: contributionData.transactionId || undefined,
-        createdAt: new Date().toISOString(),
-        createdBy: user?.id || 'system'
-      };
-
-      // Add to mock storage (in real app, this would be API call)
-      mockContributions.push(newContribution);
-      
-      // Update member's savings balance
-      const memberIndex = members.findIndex(m => m.id === contributionData.memberId);
-      if (memberIndex !== -1) {
-        const updatedMembers = [...members];
-        updatedMembers[memberIndex] = {
-          ...updatedMembers[memberIndex],
-          contributions: updatedMembers[memberIndex].contributions + parseFloat(contributionData.amount),
-          savingsBalance: updatedMembers[memberIndex].savingsBalance + parseFloat(contributionData.amount)
-        };
-        setMembers(updatedMembers);
-      }
-
-      console.log('Recorded contribution:', newContribution);
-      console.log('All contributions:', mockContributions);
-      
-      showSuccess(`Contribution of KSh ${parseFloat(contributionData.amount).toLocaleString()} recorded successfully!`);
-      
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Recording contribution:', contributionData);
+      alert('Contribution recorded successfully!');
       // Reset form
       setContributionData({
         memberId: '',
@@ -148,15 +117,8 @@ export default function AddPage() {
         transactionId: '',
         notes: ''
       });
-
-      // Optional: Redirect after success
-      // setTimeout(() => {
-      //   router.push(routes.savings.contributions.list);
-      // }, 2000);
-
     } catch (error) {
       console.error('Error recording contribution:', error);
-      alert('Error recording contribution. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -166,31 +128,9 @@ export default function AddPage() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Create new loan
-      const newLoan: Loan = {
-        id: `loan_${Date.now()}`,
-        memberId: loanData.memberId,
-        amount: parseFloat(loanData.amount),
-        date: loanData.date,
-        purpose: loanData.purpose,
-        interestRate: parseFloat(loanData.interestRate),
-        duration: parseInt(loanData.duration),
-        status: 'pending',
-        notes: loanData.notes || undefined,
-        createdAt: new Date().toISOString(),
-        createdBy: user?.id || 'system'
-      };
-
-      // Add to mock storage
-      mockLoans.push(newLoan);
-      
-      console.log('Submitted loan:', newLoan);
-      console.log('All loans:', mockLoans);
-      
-      showSuccess(`Loan application for KSh ${parseFloat(loanData.amount).toLocaleString()} submitted successfully!`);
-      
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Recording loan:', loanData);
+      alert('Loan application submitted successfully!');
       // Reset form
       setLoanData({
         memberId: '',
@@ -201,10 +141,8 @@ export default function AddPage() {
         duration: '12',
         notes: ''
       });
-
     } catch (error) {
       console.error('Error submitting loan:', error);
-      alert('Error submitting loan application. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -214,30 +152,9 @@ export default function AddPage() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Create new expense
-      const newExpense: Expense = {
-        id: `exp_${Date.now()}`,
-        memberId: expenseData.memberId,
-        amount: parseFloat(expenseData.amount),
-        date: expenseData.date,
-        category: expenseData.category as any,
-        description: expenseData.description,
-        receiptNumber: expenseData.receiptNumber || undefined,
-        status: 'approved',
-        createdAt: new Date().toISOString(),
-        createdBy: user?.id || 'system'
-      };
-
-      // Add to mock storage
-      mockExpenses.push(newExpense);
-      
-      console.log('Recorded expense:', newExpense);
-      console.log('All expenses:', mockExpenses);
-      
-      showSuccess(`Expense of KSh ${parseFloat(expenseData.amount).toLocaleString()} recorded successfully!`);
-      
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('Recording expense:', expenseData);
+      alert('Expense recorded successfully!');
       // Reset form
       setExpenseData({
         memberId: '',
@@ -247,10 +164,8 @@ export default function AddPage() {
         description: '',
         receiptNumber: ''
       });
-
     } catch (error) {
       console.error('Error recording expense:', error);
-      alert('Error recording expense. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -331,7 +246,7 @@ export default function AddPage() {
               <option value="">Choose a member...</option>
               {members.map(member => (
                 <option key={member.id} value={member.id}>
-                  {member.firstName} {member.lastName} - KSh {member.savingsBalance.toLocaleString()}
+                  {member.firstName} {member.lastName} ({member.role})
                 </option>
               ))}
             </select>
@@ -359,7 +274,7 @@ export default function AddPage() {
               }
             }}
             className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white text-gray-900"
-            placeholder="0.00"
+            placeholder="0"
           />
         </div>
 
@@ -391,28 +306,9 @@ export default function AddPage() {
     );
 
     if (activeTab === 'contribution') {
-      const selectedMember = members.find(m => m.id === contributionData.memberId);
-      
       return (
         <>
           {commonFields}
-          
-          {selectedMember && (
-            <div className="md:col-span-2 p-4 bg-blue-50 rounded-xl border border-blue-200">
-              <h4 className="font-medium text-blue-900 mb-2">Member Information</h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-blue-600">Current Balance:</span>
-                  <p className="font-semibold">KSh {selectedMember.savingsBalance.toLocaleString()}</p>
-                </div>
-                <div>
-                  <span className="text-blue-600">Total Contributions:</span>
-                  <p className="font-semibold">KSh {selectedMember.contributions.toLocaleString()}</p>
-                </div>
-              </div>
-            </div>
-          )}
-
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Contribution Type *
@@ -617,23 +513,6 @@ export default function AddPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 p-6">
       <div className="max-w-4xl mx-auto">
-        {/* Success Alert */}
-        {showSuccessAlert && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center space-x-3 animate-in slide-in-from-top duration-500">
-            <CheckCircle className="h-5 w-5 text-green-600" />
-            <div className="flex-1">
-              <p className="text-green-800 font-medium">{successMessage}</p>
-              <p className="text-green-600 text-sm">Data has been saved successfully and will reflect in reports.</p>
-            </div>
-            <button
-              onClick={() => setShowSuccessAlert(false)}
-              className="text-green-600 hover:text-green-800"
-            >
-              <AlertCircle className="h-4 w-4" />
-            </button>
-          </div>
-        )}
-
         {/* Header */}
         <div className="flex items-center space-x-4 mb-8">
           <Link 
@@ -701,13 +580,6 @@ export default function AddPage() {
               </button>
             </div>
           </form>
-        </div>
-
-        {/* Data Preview (for demonstration) */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-gray-500">
-          <div>Contributions: {mockContributions.length}</div>
-          <div>Loans: {mockLoans.length}</div>
-          <div>Expenses: {mockExpenses.length}</div>
         </div>
       </div>
     </div>

@@ -53,7 +53,7 @@ export default function Footer() {
         
         <div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
           <p className="text-gray-400 text-sm">
-            &copy; {new Date().getFullYear()} 2025 ChamaConnect. All rights reserved @Shilamy_dev.
+            &copy; {new Date().getFullYear()} ChamaConnect. All rights reserved @Shilamy_dev.
           </p>
         
         </div>
