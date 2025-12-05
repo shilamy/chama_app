@@ -12,7 +12,8 @@ export const mockMembers: Member[] = [
     joinDate: '2023-01-15',
     status: 'active',
     contributions: 12500,
-    savingsBalance: 85000
+    savingsBalance: 85000,
+    creditScore: 85, // ✅ add this
   },
   {
     id: '2',
@@ -24,7 +25,8 @@ export const mockMembers: Member[] = [
     joinDate: '2023-02-20',
     status: 'active',
     contributions: 11800,
-    savingsBalance: 72000
+    savingsBalance: 72000,
+    creditScore: 78, // ✅ add this
   },
   {
     id: '3',
@@ -36,9 +38,11 @@ export const mockMembers: Member[] = [
     joinDate: '2023-03-10',
     status: 'inactive',
     contributions: 8500,
-    savingsBalance: 45000
+    savingsBalance: 45000,
+    creditScore: 62, // ✅ add this
   }
 ];
+
 
     export const mockNgumbatos: Ngumbato[] = [
         {

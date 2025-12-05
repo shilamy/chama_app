@@ -281,6 +281,7 @@ export interface Member {
   status: 'active' | 'inactive';
   contributions: number;
   savingsBalance: number;
+  creditScore: number;
 }
 
 
