@@ -18,12 +18,12 @@ import people02 from "./people02.png";
 import people03 from "./people03.png";
 import bill from "./bill.png";
 import card from "./card.png";
-import icon01 from "./icon01.png";
-import icon04 from "./icon04.png";
-import icon05 from "./icon05.png";
-import icon06 from "./icon06.png";
-import icon07 from "./icon07.png";
-import team01 from "./team01.png"
+//import icon01 from "./icon01.png";
+//import icon04 from "./icon04.png";
+//import icon05 from "./icon05.png";
+//import icon06 from "./icon06.png";
+//import icon07 from "./icon07.png";
+//import team01 from "./team01.png"
 
 export {
   airbnb,
@@ -44,12 +44,12 @@ export {
   people01,
   people02,
   people03,
-  team01,
+  //team01,
   bill,
   card,
-  icon01,
-  icon04,
-  icon05,
-  icon06,
-  icon07
+  //icon01,
+  //icon04,
+  //icon05,
+  //icon06,
+  //icon07
 };
