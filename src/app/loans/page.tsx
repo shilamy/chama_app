@@ -28,6 +28,7 @@ import {
 import Link from 'next/link';
 import { routes } from '@/lib/routes';
 import { LoanApplication, LoanSummary } from '@/types';
+import {mockLoans} from '@/data/mockData';
 
 
 
@@ -80,83 +81,8 @@ export default function LoansOverviewPage() {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Mock data for loans
-      const mockLoans: LoanApplication[] = [
-        {
-          id: '1',
-          memberId: '1',
-          memberName: 'Jane Wanjiku',
-          amount: 50000,
-          purpose: 'Business Expansion',
-          applicationDate: '2024-01-15',
-          status: 'approved',
-          interestRate: 12.5,
-          term: 12,
-          monthlyInstallment: 4450,
-          disbursementDate: '2024-01-20',
-          dueDate: '2025-01-20',
-          creditScore: 85,
-          collateral: 'Land Title Deed'
-        },
-        {
-          id: '2',
-          memberId: '2',
-          memberName: 'Michael Otieno',
-          amount: 25000,
-          purpose: 'School Fees',
-          applicationDate: '2024-01-14',
-          status: 'pending',
-          interestRate: 12.5,
-          term: 6,
-          monthlyInstallment: 4300,
-          creditScore: 78,
-          notes: 'Urgent school fees payment'
-        },
-        {
-          id: '3',
-          memberId: '3',
-          memberName: 'Sarah Muthoni',
-          amount: 100000,
-          purpose: 'Home Renovation',
-          applicationDate: '2024-01-10',
-          status: 'disbursed',
-          interestRate: 10.0,
-          term: 24,
-          monthlyInstallment: 4615,
-          disbursementDate: '2024-01-12',
-          dueDate: '2026-01-12',
-          creditScore: 92,
-          collateral: 'Car Logbook'
-        },
-        {
-          id: '4',
-          memberId: '1',
-          memberName: 'Jane Wanjiku',
-          amount: 30000,
-          purpose: 'Medical Emergency',
-          applicationDate: '2024-01-08',
-          status: 'completed',
-          interestRate: 12.5,
-          term: 8,
-          monthlyInstallment: 3950,
-          disbursementDate: '2024-01-09',
-          dueDate: '2024-09-09',
-          creditScore: 85
-        },
-        {
-          id: '5',
-          memberId: '4',
-          memberName: 'David Kimani',
-          amount: 75000,
-          purpose: 'Vehicle Purchase',
-          applicationDate: '2024-01-05',
-          status: 'rejected',
-          interestRate: 12.5,
-          term: 18,
-          monthlyInstallment: 4850,
-          creditScore: 65,
-          notes: 'Insufficient credit score'
-        }
-      ];
+      
+
 
       // Mock summary data
       const mockSummary: LoanSummary = {
