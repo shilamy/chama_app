@@ -2,7 +2,7 @@
 import { Calendar, DollarSign, TrendingUp, Users, Shield, BarChart3, Clock } from "lucide-react";
 
 // If you have actual image imports, keep them. Otherwise, we'll use placeholder approaches
-import { airbnb, binance, dropbox, coinbase, team01, people02, people03, people01, facebook, instagram, linkedin, twitter } from "@/assets";
+import { airbnb, binance, dropbox, coinbase, people02, people03, people01, facebook, instagram, linkedin, twitter } from "@/assets";
 
 export const navLinks = [
   {
@@ -133,7 +133,7 @@ export const team = [
     id: "team-4",
     name: "Sheila",
     role: "Developer",
-    profile: team01, // Keep if you have the actual image
+    profile: people02, // Keep if you have the actual image
   },
 ];
 
