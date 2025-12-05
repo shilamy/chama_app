@@ -29,9 +29,9 @@ const mockMembers: Member[] = [
     role: 'chairperson',
     joinDate: '2023-01-15',
     status: 'active',
-    contributions: 50000,
-    savingsBalance: 125000,
-    creditScore: 750 // REQUIRED FIELD
+    contributions: 125000,
+    savingsBalance: 50000,
+    creditScore: 82
   },
   {
     id: '2',
@@ -39,12 +39,12 @@ const mockMembers: Member[] = [
     lastName: 'Otieno',
     email: 'michael@example.com',
     phone: '+254723456789',
-    role: 'treasurer',
+    role: 'secretary',
     joinDate: '2023-02-20',
     status: 'active',
-    contributions: 33000,
-    savingsBalance: 98000,
-    creditScore: 680 // REQUIRED FIELD
+    contributions: 98000,
+    savingsBalance: 75000,
+    creditScore: 75
   },
   {
     id: '3',
@@ -55,11 +55,12 @@ const mockMembers: Member[] = [
     role: 'member',
     joinDate: '2023-03-10',
     status: 'inactive',
-    contributions: 12000,
-    savingsBalance: 45000,
-    creditScore: 540 // REQUIRED FIELD
+    contributions: 45000,
+    savingsBalance: 0,
+    creditScore: 52
   }
 ];
+
 
 
 export default function EditMemberPage({ searchParams }: any) {
@@ -72,7 +73,8 @@ export default function EditMemberPage({ searchParams }: any) {
     joinDate: "",
     role: "member",
     status: "active",
-    password: ""
+    password: "",
+    creditScore: 0
   });
 
   useEffect(() => {
@@ -86,7 +88,8 @@ export default function EditMemberPage({ searchParams }: any) {
         joinDate: member.joinDate,
         role: member.role,
         status: member.status,
-        password: ""
+        password: "",
+        creditScore: member.creditScore || 0
       });
     }
   }, [memberId]);
