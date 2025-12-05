@@ -6,63 +6,61 @@ import { ArrowLeft } from "lucide-react";
 
 interface Member {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
+  role: string;
   joinDate: string;
-  status: "active" | "inactive";
-  totalSavings: number;
-  totalLoans: number;
-  lastContribution: string;
-  role: "admin" | "treasurer" | "secretary" | "member";
-  performance: number;
-  password: string;
+  status: string;
+  contributions: number;
+  savingsBalance: number;
+  creditScore?: number; // optional
 }
+
 
 const mockMembers: Member[] = [
   {
-    id: "1",
-    name: "Jane Wanjiku",
-    email: "jane@example.com",
-    phone: "+254712345678",
-    joinDate: "2023-01-15",
-    status: "active",
-    totalSavings: 125000,
-    totalLoans: 50000,
-    lastContribution: "2024-01-10",
-    role: "treasurer",
-    performance: 95,
-    password: "encrypted_password_1"
+    id: '1',
+    firstName: 'Jane',
+    lastName: 'Wanjiku',
+    email: 'jane@example.com',
+    phone: '+254712345678',
+    role: 'chairperson',
+    joinDate: '2023-01-15',
+    status: 'active',
+    contributions: 50000,
+    savingsBalance: 125000,
+    creditScore: 750 // REQUIRED FIELD
   },
   {
-    id: "2",
-    name: "Michael Otieno",
-    email: "michael@example.com",
-    phone: "+254723456789",
-    joinDate: "2023-02-20",
-    status: "active",
-    totalSavings: 98000,
-    totalLoans: 75000,
-    lastContribution: "2024-01-08",
-    role: "admin",
-    performance: 87,
-    password: "encrypted_password_2"
+    id: '2',
+    firstName: 'Michael',
+    lastName: 'Otieno',
+    email: 'michael@example.com',
+    phone: '+254723456789',
+    role: 'treasurer',
+    joinDate: '2023-02-20',
+    status: 'active',
+    contributions: 33000,
+    savingsBalance: 98000,
+    creditScore: 680 // REQUIRED FIELD
   },
   {
-    id: "3",
-    name: "Grace Auma",
-    email: "grace@example.com",
-    phone: "+254734567890",
-    joinDate: "2023-03-10",
-    status: "inactive",
-    totalSavings: 45000,
-    totalLoans: 0,
-    lastContribution: "2023-12-15",
-    role: "member",
-    performance: 62,
-    password: "encrypted_password_3"
+    id: '3',
+    firstName: 'Grace',
+    lastName: 'Auma',
+    email: 'grace@example.com',
+    phone: '+254734567890',
+    role: 'member',
+    joinDate: '2023-03-10',
+    status: 'inactive',
+    contributions: 12000,
+    savingsBalance: 45000,
+    creditScore: 540 // REQUIRED FIELD
   }
 ];
+
 
 export default function EditMemberPage({ searchParams }: any) {
   const memberId = searchParams.id;
