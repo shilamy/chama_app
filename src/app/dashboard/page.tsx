@@ -797,11 +797,11 @@ export default function DashboardOverview() {
                       {quickActions.slice(0, 4).map((action, index) => {
                         const Icon = action.icon;
                         return (
-                         <Link 
-                          key={index} 
-                          href={action.href ? String(action.href) : '#'} 
-                          className="flex items-center justify-between p-3 bg-white/10 rounded-lg hover:bg-white/20 transition-all duration-200 group"
-                            >
+                        <Link
+                        key={index}
+                        href={typeof action.href === 'string' ? action.href : '#'}
+                        className="flex items-center justify-between p-3 bg-white/10 rounded-lg hover:bg-white/20"
+                      >
 
                             <div className="flex items-center">
                               <div className="p-2 bg-white/20 rounded-lg mr-3 group-hover:bg-white/30 transition-colors">
