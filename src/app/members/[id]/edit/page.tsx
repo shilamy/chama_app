@@ -80,7 +80,7 @@ export default function EditMemberPage({ searchParams }: any) {
 
     if (member) {
       setFormData({
-        name: member.name,
+        name: `${member.firstName} ${member.lastName}`,
         email: member.email,
         phone: member.phone,
         joinDate: member.joinDate,
