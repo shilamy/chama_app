@@ -17,6 +17,7 @@ import {
 import Link from 'next/link';
 import { routes } from '@/lib/routes';
 import { Member } from '@/types';
+import { mockMembers } from '@/data/mockData';
 
 export default function AddPage() {
   const { user } = useAuth();
@@ -65,32 +66,7 @@ export default function AddPage() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 800));
       
-      const mockMembers: Member[] = [
-        {
-          id: '1',
-          firstName: 'Jane',
-          lastName: 'Wanjiku',
-          email: 'jane@example.com',
-          phone: '+254712345678',
-          role: 'chairperson',
-          joinDate: '2023-01-15',
-          status: 'active',
-          contributions: 125000,
-          savingsBalance: 125000,
-        },
-        {
-          id: '2',
-          firstName: 'Michael',
-          lastName: 'Otieno',
-          email: 'michael@example.com',
-          phone: '+254723456789',
-          role: 'treasurer',
-          joinDate: '2023-02-20',
-          status: 'active',
-          contributions: 98000,
-          savingsBalance: 98000,
-        }
-      ];
+      // Replace with actual API call to fetch members
       
       setMembers(mockMembers);
     } catch (error) {
