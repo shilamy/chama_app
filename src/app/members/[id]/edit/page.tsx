@@ -3,71 +3,33 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { Member } from "@/types";
+import { mockMembers } from "@/data/mockData";
 
-interface Member {
-  id: string;
+type PageProps = {
+  searchParams: {
+    id?: string;
+  };
+};
+
+type FormState = {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
-  role: string;
   joinDate: string;
-  status: string;
-  contributions: number;
-  savingsBalance: number;
-  creditScore?: number; // optional
-}
+  role: Member["role"];
+  status: Member["status"];
+  password: string;
+  creditScore: number;
+};
 
-
-const mockMembers: Member[] = [
-  {
-    id: '1',
-    firstName: 'Jane',
-    lastName: 'Wanjiku',
-    email: 'jane@example.com',
-    phone: '+254712345678',
-    role: 'chairperson',
-    joinDate: '2023-01-15',
-    status: 'active',
-    contributions: 125000,
-    savingsBalance: 50000,
-    creditScore: 82
-  },
-  {
-    id: '2',
-    firstName: 'Michael',
-    lastName: 'Otieno',
-    email: 'michael@example.com',
-    phone: '+254723456789',
-    role: 'secretary',
-    joinDate: '2023-02-20',
-    status: 'active',
-    contributions: 98000,
-    savingsBalance: 75000,
-    creditScore: 75
-  },
-  {
-    id: '3',
-    firstName: 'Grace',
-    lastName: 'Auma',
-    email: 'grace@example.com',
-    phone: '+254734567890',
-    role: 'member',
-    joinDate: '2023-03-10',
-    status: 'inactive',
-    contributions: 45000,
-    savingsBalance: 0,
-    creditScore: 52
-  }
-];
-
-
-
-export default function EditMemberPage({ searchParams }: any) {
+export default function EditMemberPage({ searchParams }: PageProps) {
   const memberId = searchParams.id;
 
-  const [formData, setFormData] = useState({
-    name: "",
+  const [formData, setFormData] = useState<FormState>({
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     joinDate: "",
@@ -78,31 +40,51 @@ export default function EditMemberPage({ searchParams }: any) {
   });
 
   useEffect(() => {
-    const member = mockMembers.find(m => m.id === memberId);
+    if (!memberId) return;
 
-    if (member) {
-      setFormData({
-        name: `${member.firstName} ${member.lastName}`,
-        email: member.email,
-        phone: member.phone,
-        joinDate: member.joinDate,
-        role: member.role,
-        status: member.status,
-        password: "",
-        creditScore: member.creditScore || 0
-      });
-    }
+    const member = mockMembers.find(m => m.id === memberId);
+    if (!member) return;
+
+    setFormData({
+      firstName: member.firstName,
+      lastName: member.lastName,
+      email: member.email,
+      phone: member.phone,
+      joinDate: member.joinDate,
+      role: member.role,
+      status: member.status,
+      password: "",
+      creditScore: member.creditScore ?? 0
+    });
   }, [memberId]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  if (!memberId) {
+    return <div className="p-6">Member not found</div>;
+  }
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === "creditScore" ? Number(value) : value
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Updated data:", formData);
+
+    const payload = {
+      ...formData,
+      fullName: `${formData.firstName} ${formData.lastName}`
+    };
+
+    console.log("Updated data:", payload);
   };
 
+  // Render the form
   return (
     <div className="p-6">
       {/* Header */}
@@ -116,7 +98,7 @@ export default function EditMemberPage({ searchParams }: any) {
 
         <div>
           <h1 className="text-xl font-bold">Edit Member</h1>
-          <p className="text-gray-500 text-sm">{memberId}</p>
+          <p className="text-gray-500 text-sm">ID: {memberId}</p>
         </div>
       </div>
 
@@ -126,10 +108,21 @@ export default function EditMemberPage({ searchParams }: any) {
         className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow"
       >
         <div>
-          <label className="block font-medium mb-1">Name</label>
+          <label className="block font-medium mb-1">First Name</label>
           <input
-            name="name"
-            value={formData.name}
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+            className="w-full p-2 rounded border"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">Last Name</label>
+          <input
+            name="lastName"
+            value={formData.lastName}
             onChange={handleChange}
             className="w-full p-2 rounded border"
             required
@@ -178,10 +171,11 @@ export default function EditMemberPage({ searchParams }: any) {
             onChange={handleChange}
             className="w-full p-2 rounded border"
           >
-            <option value="admin">Admin</option>
+            <option value="chairperson">Chairperson</option>
             <option value="treasurer">Treasurer</option>
             <option value="secretary">Secretary</option>
             <option value="member">Member</option>
+            <option value="admin">Admin</option>
           </select>
         </div>
 
@@ -196,6 +190,15 @@ export default function EditMemberPage({ searchParams }: any) {
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1">Credit Score</label>
+          <input
+            value={formData.creditScore}
+            disabled
+            className="w-full p-2 rounded border bg-gray-100"
+          />
         </div>
 
         <div className="md:col-span-2">
