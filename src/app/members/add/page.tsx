@@ -21,7 +21,6 @@ import { mockMembers } from '@/data/mockData';
 /* =======================
    Mock storage
 ======================= */
-
 const mockContributions: Contribution[] = [];
 const mockLoans: Loan[] = [];
 const mockExpenses: Expenses[] = [];
@@ -29,15 +28,12 @@ const mockExpenses: Expenses[] = [];
 /* =======================
    Local Types
 ======================= */
-
-type ContributionType =
-  | 'savings'
-  | 'emergency'
-  | 'special'
-  | 'loan_repayment';
-
+type ContributionType = 'monthly' | 'emergency' | 'special' | 'loan_repayment';
 type PaymentMethod = 'mpesa' | 'cash' | 'bank';
 
+/* =======================
+   Component
+======================= */
 export default function AddPage() {
   const { user } = useAuth();
   const router = useRouter();
@@ -55,12 +51,11 @@ export default function AddPage() {
   /* =======================
      Form States
   ======================= */
-
   const [contributionData, setContributionData] = useState({
     memberId: '',
     amount: '',
     date: new Date().toISOString().split('T')[0],
-    type: 'savings' as ContributionType,
+    type: 'monthly' as ContributionType,
     paymentMethod: 'mpesa' as PaymentMethod,
     transactionId: '',
     notes: ''
@@ -88,7 +83,6 @@ export default function AddPage() {
   /* =======================
      Effects
   ======================= */
-
   useEffect(() => {
     const loadMembers = async () => {
       setMemberLoading(true);
@@ -96,7 +90,6 @@ export default function AddPage() {
       setMembers(mockMembers);
       setMemberLoading(false);
     };
-
     loadMembers();
   }, []);
 
@@ -114,7 +107,6 @@ export default function AddPage() {
   /* =======================
      Submit Handlers
   ======================= */
-
   const handleContributionSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -159,7 +151,7 @@ export default function AddPage() {
       memberId: '',
       amount: '',
       date: new Date().toISOString().split('T')[0],
-      type: 'savings',
+      type: 'monthly',
       paymentMethod: 'mpesa',
       transactionId: '',
       notes: ''
@@ -243,7 +235,6 @@ export default function AddPage() {
   /* =======================
      Helpers
   ======================= */
-
   const submitHandler =
     activeTab === 'contribution'
       ? handleContributionSubmit
@@ -254,11 +245,9 @@ export default function AddPage() {
   /* =======================
      Render
   ======================= */
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50/30 p-6">
       <div className="max-w-4xl mx-auto">
-
         {showSuccessAlert && (
           <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center gap-3">
             <CheckCircle className="h-5 w-5 text-green-600" />
@@ -285,8 +274,7 @@ export default function AddPage() {
           onSubmit={submitHandler}
           className="bg-white rounded-2xl p-8 shadow-sm border"
         >
-          {/* Your renderFormFields() JSX stays exactly as-is */}
-          {/* Intentionally unchanged UI */}
+          {/* Keep your renderFormFields() JSX here as before */}
 
           <div className="mt-8 flex gap-4">
             <Link
