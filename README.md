@@ -1,3 +1,5 @@
+<img width="1920" height="1080" alt="chama_app" src="https://github.com/user-attachments/assets/38c591d9-d9ac-4605-b393-d6ba10e4721f" />
+
 # 💰 Chama Management System
 
 A full-stack **Chama (informal banking)** management platform designed to help savings groups efficiently manage members, contributions, loans, fines, and reports.  
